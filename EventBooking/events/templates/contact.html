@@ -1,0 +1,69 @@
+{% extends 'common.html' %}
+{% block title %}Contact us{% endblock %}
+
+{% block content %}
+<style>
+    body {
+    background: linear-gradient(135deg, #f8f9fa, #e3f2fd, #e8eaf6);
+    background-size: cover;
+    font-family: Arial, sans-serif;
+}
+
+.bg-white, .bg-light {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    resize: none;
+}
+</style>
+<div class="container mt" style="padding-top: 80px">
+    <div class="row">
+        <div class="col-md-6">
+
+                <div class="bg-white p-4 rounded shadow-sm">
+                <h2 class="text-primary" style="font-weight: bold;">Get in Touch</h2>
+                <p>If you have any questions, feel free to reach out to us by filling out the form below:</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                     <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-control" rows="5" placeholder="Write your message here" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" style="font-size: 1.2rem;">Submit</button>
+                </form>
+            </div>
+        </div>
+            <div class="col-md-6">
+
+            <div class="bg-light p-4 rounded shadow-sm">
+                <h2 class="text-info" style="font-weight: bold;">Contact Information</h2>
+                <p>If you'd prefer to reach us directly, here are our contact details:</p>
+                <ul class="list-unstyled">
+                    <li><strong>Address:</strong> 123 Event Avenue, CityName, Country</li>
+                    <li><strong>Email:</strong> support@eventbooking.com</li>
+                    <li><strong>Phone:</strong> +123 456 7890</li>
+                    <li><strong>Working Hours:</strong> Mon-Fri, 9:00 AM - 6:00 PM</li>
+                </ul>
+                <h2 class="text-success mt-4" style="font-weight: bold;">Follow Us</h2>
+                <div class="d-flex">
+                    <a href="https://www.facebook.com" class="me-3 text-primary"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a href="https://twitter.com" class="me-3 text-info"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="https://www.instagram.com" class="me-3 text-danger"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://www.linkedin.com" class="text-primary"><i class="fab fa-linkedin fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

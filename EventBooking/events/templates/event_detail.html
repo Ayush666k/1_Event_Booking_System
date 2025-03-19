@@ -1,0 +1,110 @@
+{% extends 'common.html' %}
+{% block title %} Event_detail {% endblock %}
+
+{% block content %}
+<style>
+    .event-details, .booking-section, .bookings-section, .faq-section {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-success {
+        background: linear-gradient(to right, #28a745, #218838);
+        border: none;
+    }
+
+    .btn-success:hover {
+        background: #218838;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .img-fluid {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .list-group-item {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .container {
+        max-width: 1100px;
+    }
+</style>
+
+<div style="background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);">
+    <div class="container mt-5" style="padding-top: 70px;">
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-lg-8 col-md-12">
+            <!-- Event Details Section -->
+            <div class="event-details">
+                <h1 class="text-primary">{{ event.name }}</h1>
+                <p><strong>Description:</strong> {{ event.description }}</p>
+                <p><strong>Date:</strong> {{ event.date }}</p>
+                <p><strong>Location:</strong> {{ event.location }}</p>
+            </div>
+
+            <!-- Booking Form -->
+            <div class="booking-section">
+                <h2 class="text-success">Book Your Spot</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success w-100">Book Now</button>
+                </form>
+            </div>
+
+            <!-- Images Section -->
+            <div class="images-section">
+                <h2 class="text-warning">Event Highlights</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <img src="/static/imgINT.jpeg" class="img-fluid" alt="Interactive Sessions">
+                        <p class="mt-2 text-center">Interactive Sessions</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <img src="/static/imgNET.jpeg" class="img-fluid" alt="Networking Opportunities">
+                        <p class="mt-2 text-center">Networking Opportunities</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <img src="/static/imgGW.jpg" class="img-fluid" alt="Exclusive Giveaways">
+                        <p class="mt-2 text-center">Exclusive Giveaways</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-lg-4 col-md-12">
+            <!-- Bookings Section -->
+            <div class="bookings-section">
+                <h2 class="text-info">Bookings</h2>
+                <ul class="list-group">
+                    {% for booking in bookings %}
+                        <li class="list-group-item">
+                            <strong>{{ booking.name }}</strong>
+                            <span class="text-muted">({{ booking.email }})</span>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item text-muted">No bookings yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- FAQs Section -->
+            <div class="faq-section">
+                <h2 class="text-danger">FAQs</h2>
+                <p><strong>Q:</strong> Can I cancel my booking?<br><strong>A:</strong> Yes, cancellations are allowed up to 24 hours before the event.</p>
+                <p><strong>Q:</strong> Is there parking available?<br><strong>A:</strong> Yes, free parking is provided for all attendees.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'common.html' %}
+{% block title %} Home- EventBooking {% endblock %}
+
+{% block content %}
+
+
+     <div class="position-relative vh-100 ">
+         <img src="/static/imgHM.jpeg" class="position-absolute top-0 start-0 w-100 h-100"
+              alt="Events organising" style="object-fit: cover;">
+        <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+            <h1 class="display-4 fw-bold">Welcome to Event Booking System</h1>
+            <p class="lead">Discover and book your favorite events with ease.</p>
+            <a href="{% url 'event_list' %}" class="btn btn-primary btn-lg mt-3">View Events</a>
+        </div>
+    </div>
+
+{% endblock %}

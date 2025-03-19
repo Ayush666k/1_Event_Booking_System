@@ -1,0 +1,103 @@
+{% extends 'common.html' %}
+{% block title %} Home- EventBooking {% endblock %}
+
+{% block content %}
+<style>
+    .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+          }
+.card:hover {
+    transform: scale(1.05);
+}
+
+</style>
+
+    <div style="padding-top:5%;
+background: linear-gradient(90deg, rgba(155,123,159,1) 23%,rgba(255,148,241,1) 100%);">
+        <div class="container my-5 py-5" style="background:
+        border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+            <h1 class="text-center" style="padding:25px; font-weight: bold; font-size: 3rem; color:#33">
+                Upcoming Events</h1>
+            <p class="text-center" style="font-size: 1.2rem; color: #555;">
+                Your one-stop destination for discovering and booking amazing events!</p>
+        <div class="row mt-4">
+            {% for event in events %}
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="background: red">
+                        <div class="card-body" style="padding: 20px; background: rgb(155,123,159);">
+                            <h5 class="card-title" style="color: white; font-weight: bold;">{{ event.name }}</h5>
+                            <p class="card-text" style="color: #666;">{{ event.description | truncatechars:100 }}</p>
+                            <p><strong>Date:</strong> {{ event.date }}</p>
+                            <a href="{% url 'event_detail' event.id %}" class="btn btn-primary btn-block" style="background:green; color:white">View Details</a>
+                        </div>
+                    </div>
+                    <h3> </h3>
+                </div>
+            {% empty %}
+                <p class="text-center" style="color: #888;">No events available.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+     <section style="background: linear-gradient(to right, #ff7e5f, #feb47b); color: white; text-align: center; padding: 50px;">
+        <h2 style="font-size: 2.5rem;">Next Big Event Starts In</h2>
+        <div id="countdown" style="font-size: 2rem; margin-top: 20px;">00d 00h 00m 00s</div>
+    </section>
+
+    <div class="container my-5">
+         <h2>What Our Users Say</h2>
+         <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <blockquote class="blockquote text-center">
+                <p>"This platform has transformed the way I attend events!"</p>
+                <footer class="blockquote-footer">Jane Doe</footer>
+            </blockquote>
+        </div>
+        <div class="carousel-item">
+            <blockquote class="blockquote text-center">
+                <p>"Amazing experience booking through EventBooking!"</p>
+                <footer class="blockquote-footer">John Smith</footer>
+            </blockquote>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+</div>
+
+    </div>
+        <div class="container text-center my-5" style="background: aliceblue; padding: 30px;">
+            <h3>Don't Miss Out!</h3>
+            <p>Subscribe to our newsletter and stay updated on upcoming events.</p>
+             <form>
+                  <input type="email" class="form-control" placeholder="Enter your email" required>
+                  <button type="submit" class="btn btn-primary mt-2">Subscribe</button>
+             </form>
+        </div>
+
+    </div>
+
+<script>
+    const eventDate = new Date("2025-01-15T18:00:00").getTime();
+    const countdownElement = document.getElementById("countdown");
+
+    setInterval(() => {
+        const now = new Date().getTime();
+        const timeLeft = eventDate - now;
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        countdownElement.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+</script>
+
+
+{% endblock %}
