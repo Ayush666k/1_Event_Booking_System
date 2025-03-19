@@ -1,3 +1,3 @@
 from django.shortcuts import render
-
-# Create your views here.
+#program in events directory
+# Create your views here. 
